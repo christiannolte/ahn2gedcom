@@ -126,20 +126,17 @@ while i<entries:
     i=i+1
 #myfam.print_them()
 #myind.print_them()
-print "-------------------------------------------------------------"
-nogendersearch=raw_input ("Sollen Personen unbekannten geschlechts gesucht werden j/n?")
-if (nogendersearch=="j"):
-    for i in myind._individuals:
-        if i._geschlecht!="männlich" and i._geschlecht!="weiblich":
-            print "--------------------------------------------"
-            print i._vorname
-            newgender=raw_input ("Geschlecht m/w/u")
-            if newgender=="m":
-                i._geschlecht="männlich"
-            elif newgender=="w":
-                i._geschlecht="weiblich"
-            else:
-                i._geschlecht="unknown"
+for i in myind._individuals:
+    if i._geschlecht!="männlich" and i._geschlecht!="weiblich":
+        print "--------------------------------------------"
+        print i._vorname+" "+i._name+ " wurde mit unbekannten Geschlecht gefunden"
+        newgender=raw_input ("Geschlecht m(aennlich)/w(eiblich)/u(nbekannt) m/w/u? ")
+        if newgender=="m":
+            i._geschlecht="männlich"
+        elif newgender=="w":
+            i._geschlecht="weiblich"
+        else:
+            i._geschlecht="unknown"
 
 
 myfile=open("gedcom_export.ged","w")
