@@ -1,0 +1,17 @@
+from families import families
+
+fams=families()
+print fams.get_id(1,2)
+fams.create_family(1,2)
+print fams.get_id(1,2)
+print fams.get_id(3,4)
+fams.create_family(3,4)
+print fams.get_id(3,4)
+print fams.get_id(1,2)
+fams.print_them()
+fams.add_child_to_family(1,5)
+fams.add_child_to_family(1,6)
+fams.add_child_to_family(1,7)
+fams.print_them()
+print fams.get_id_or_create_family(8,9)
+print fams.get_id_or_create_family(1,2)
