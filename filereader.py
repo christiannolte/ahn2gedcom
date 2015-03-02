@@ -4,8 +4,7 @@ import struct
 from families import families
 from individuals import individuals
 
-#filename="weber.ahn"
-filename=raw_input ("Name der Datei, die verarbeitet werden soll?")
+filename=raw_input ("Name der AHN-Datei, die verarbeitet werden soll?")
 version="1.0.0"
 
 myfam=families()
