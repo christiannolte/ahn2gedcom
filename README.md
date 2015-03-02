@@ -1,6 +1,6 @@
 # ahn2gedcom
 
-Is a converter that converts genealogy Files from a format, that was used by a Data Becker Software called Familienchronik into the gedcom format.
+Is a converter that converts genealogy Files from a format, that was used by a "Data Becker Goldene Serie" Software called "Familienchronik" into the gedcom format.
 
 The Software requires Python. It can be started by calling the file filereader.py.
 
