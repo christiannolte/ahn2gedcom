@@ -23,7 +23,8 @@ entries=size/1100
 i=0
 
 while i<entries:
-    #print "Datensatz "+ str(i)+"/"+str(entries) 
+    print "+++++++++++++++++++++++++++++++++++++++"
+    print "Datensatz "+ str(i+1)+"/"+str(entries) 
     f.seek(i*1100)
     id=struct.unpack('i', f.read(4))[0]
     name=f.read(20).rstrip().rstrip()
@@ -129,7 +130,7 @@ while i<entries:
 #Personen mit unbekannten Geschlecht finden
 for i in myind._individuals:
     if i._geschlecht!="männlich" and i._geschlecht!="weiblich":
-        print "-----------------------------------------------------------------------------------"
+        print "-------------------------------------------------------------------------------"
         print i._vorname+"/"+i._name+ " wurde mit unbekannten Geschlecht gefunden"
         newgender=raw_input ("Geschlecht m(aennlich)/w(eiblich)/u(nbekannt) m/w/u? ")
         if newgender=="m":
@@ -141,12 +142,12 @@ for i in myind._individuals:
 #Personen mit Schraegstrich im Namen finden
 for i in myind._individuals:
     if i._vorname.find("/")!=-1:
-        print "-----------------------------------------------------------------------------------"
+        print "-------------------------------------------------------------------------------"
         print "Schraegstrich in Vorname gefunden, Ein Vorname darf keinen Schraegstrich enthalten"
         print i._vorname
         i._vorname=raw_input ("Geben Sie dan Namen ohne Schraegstrich ein! ")
 
-myfile=open("gedcom_export.ged","w")
+myfile=open("gedcom_export_"+filename+".ged","w")
 gedcom_helper().write_header(myfile)
 print "-------------------------------------------------------------"
 print "Hier muessen Familien auf weibliche Ehemaenner und maennliche Ehefrauen ueberprueft werden"
