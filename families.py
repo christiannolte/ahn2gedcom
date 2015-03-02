@@ -5,6 +5,9 @@ class families():
         self._families=[]
         self._next_id=1
 
+    def remove(self,id):
+        self._families.remove(id)
+
     def get_id(self,hus,wif):
         for fam in self._families:
             if fam.compare(hus,wif)==1:
@@ -49,7 +52,10 @@ class families():
             if fam.get_id() == id:
                 fam.set_marriage_information(date,place)
             
-        
+    def get_fam(self,id):   
+        for fam in self._families:
+            if fam.get_id() == id:
+                return fam
 
     def print_them(self):
         for fam in self._families:
