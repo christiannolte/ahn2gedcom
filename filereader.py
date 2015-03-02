@@ -9,10 +9,6 @@ version="1.0.0"
 
 myfam=families()
 myind=individuals()
-print "Trying to convert file \"weber.ahn\" if you want to convert another file,"
-print "please change the referenced filename in filereader.py."
-print "You can find the variable filename at the beginning of the file"
-print ""
 print "Version: " + version
 print "lets go..."
 print ""
@@ -93,20 +89,6 @@ while i<entries:
             own_fid4=myfam.get_id_or_create_family(partner4,id)
         myfam.set_date_and_place(own_fid4,marri4date,marri4place)
 
-    #print str(id) + " " + name + " " + vorname + " " + w_vornamen
-    #print "\tGeburtsname: "+ geburtsname
-    #print "\tGeburt: "+ birth_date +" " + birth_place
-    #print "\tGeschlecht: " + gender
-    #print "\tBeruf: "+ occupation
-    #print "\tVater: " + str(daddy) + " Mutter: "+str(mommy)
-    #print "\tTod: "+death_date + " in " + death_place
-    #print "\tAlter: "+age
-    #print "\tBeerdigung: "+funeral_date + " in " + funeral_place
-    #print "\tPartner1: " + str(partner1) +" "+ marri1date + " " + marri1place
-    #print "\tPartner2: " + str(partner2) +" "+ marri2date + " " + marri2place
-    #print "\tPartner3: " + str(partner3) +" "+ marri3date + " " + marri3place
-    #print "\tPartner4: " + str(partner4) +" "+ marri4date + " " + marri4place
-    #print ""
     myind.add_individual(id,
                          name,
                          geburtsname,
@@ -125,8 +107,7 @@ while i<entries:
                          myfam.get_id_or_create_family(daddy,mommy),
                          own_fid1,own_fid2,own_fid3,own_fid4)
     i=i+1
-#myfam.print_them()
-#myind.print_them()
+
 #Personen mit unbekannten Geschlecht finden
 for i in myind._individuals:
     if i._geschlecht!="männlich" and i._geschlecht!="weiblich":
@@ -139,19 +120,39 @@ for i in myind._individuals:
             i._geschlecht="weiblich"
         else:
             i._geschlecht="unknown"
+
 #Personen mit Schraegstrich im Namen finden
 for i in myind._individuals:
     if i._vorname.find("/")!=-1:
         print "-------------------------------------------------------------------------------"
         print "Schraegstrich in Vorname gefunden, Ein Vorname darf keinen Schraegstrich enthalten"
         print i._vorname
-        i._vorname=raw_input ("Geben Sie dan Namen ohne Schraegstrich ein! ")
+        i._vorname=raw_input ("Geben Sie bitte dan Vornamen ohne Schraegstrich ein! ")
+        
+#doppelte Ehen finden
+for m in myfam._families:
+    if myfam.get_id(m._wif,m._hus):
+        fam1=m
+        fam2=myfam.get_fam(myfam.get_id(m._wif,m._hus))
+        if myind.get_gender(fam1._hus)=="männlich":
+            if fam2._date!="":
+                fam1._date=fam2._date
+            if fam2._place!="":
+                fam1._place=fam2._place
+            for child in fam2._childs:
+                fam1.add_child(child)
+            myfam.remove(fam2)
+        else:
+            if fam1._date!="":
+                fam2._date=fam1._date
+            if fam1._place!="":
+                fam2._place=fam1._place
+            for child in fam1._childs:
+                fam2.add_child(child)
+            myfam.remove(fam1)
 
 myfile=open("gedcom_export_"+filename+".ged","w")
 gedcom_helper().write_header(myfile)
-print "-------------------------------------------------------------"
-print "Hier muessen Familien auf weibliche Ehemaenner und maennliche Ehefrauen ueberprueft werden"
-print "-------------------------------------------------------------"
 myind.write_them_to_gedcom(myfile)
 myfam.write_them_to_gedcom(myfile)
 gedcom_helper().write_footer(myfile)
