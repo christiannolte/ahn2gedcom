@@ -19,7 +19,7 @@ entries=size/1100
 i=0
 
 while i<entries:
-    print "+++++++++++++++++++++++++++++++++++++++"
+    print "++++++++++++++++++++++++++++++++++++++++"
     print "Datensatz "+ str(i+1)+"/"+str(entries) 
     f.seek(i*1100)
     id=struct.unpack('i', f.read(4))[0]
