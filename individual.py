@@ -4,7 +4,7 @@ from gedcom_helper import gedcom_helper
 
 class individual():
     def __init__(self,id,name,geburtsname,vorname,geburtsdatum,geburtsort,geschlecht,taufdatum,taufort,religion,sterbedatum,sterbeort,beerdigungsdatum,beerdigungsort,partner1,partner2,partner3,partner4,notizen,vater,mutter,beruf,childof,f1,f2,f3,f4):
-        print "processing " +vorname + " " + name 
+        print "Verarbeite: " +vorname + " " + name 
         self._id=id
         self._name=name
         self._geburtsname=geburtsname
@@ -63,7 +63,6 @@ class individual():
         print "\Fam2:"+str(self._f2)
         print "\Fam3:"+str(self._f3)
         print "\Fam4:"+str(self._f4)
-        
         print "end---------------------------------------"
 
     def write2gedcom(self,filedes):
